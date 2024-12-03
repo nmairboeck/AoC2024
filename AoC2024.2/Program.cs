@@ -1,19 +1,13 @@
 ﻿Console.WriteLine("AoC 2024 Day 2");
 static bool CheckLine(int[] numbers)
 {
-    var bigger = numbers[1] > numbers[0];
-    var isValid = Math.Abs(numbers[0] - numbers[1]) is <= 3 and not 0;
-    for (var i = 1; i < numbers.Length - 1 && isValid; i++)
+    var sum = 0;
+    for (var i = 0; i < numbers.Length - 1; i++)
     {
-        if (Math.Abs(numbers[i + 1] - numbers[i]) is > 3 or 0
-            || (bigger && (numbers[i] > numbers[i + 1]))
-            || (!bigger && (numbers[i] < numbers[i + 1])))
-        {
-            isValid = false;
-        }
+        sum += Math.Abs(numbers[i] - numbers[i + 1]) is <= 3 ? numbers[i].CompareTo(numbers[i + 1]) : 0;
     }
 
-    return isValid;
+    return Math.Abs(sum) == numbers.Length - 1;
 }
 
 var lines = (await System.IO.File.ReadAllLinesAsync("Input.txt"))
@@ -33,8 +27,8 @@ foreach (var numbers in lines)
     }
     else
     {
-        var errors = Enumerable.Range(0, numbers.Length).Select(i => numbers.Where((_, index) => index != i).ToArray()).Any(CheckLine);
-        if (errors)
+        var isValidWithDampener = Enumerable.Range(0, numbers.Length).Select(i => numbers.Where((_, index) => index != i).ToArray()).Any(CheckLine);
+        if (isValidWithDampener)
         {
             countWithDampener++;
         }
