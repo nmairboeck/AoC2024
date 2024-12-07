@@ -89,7 +89,7 @@ async Task RunPart2(string fileName)
 
         void Evaluate(long index, long currentValue)
         {
-            if (isValid)
+            if (isValid || currentValue > target)
             {
                 //only one valid result is needed
                 return;
