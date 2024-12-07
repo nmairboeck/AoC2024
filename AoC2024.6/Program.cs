@@ -2,11 +2,14 @@
 using System.Diagnostics;
 
 await Run("example.txt");
+var stopwatch = Stopwatch.StartNew();
 await Run("input.txt");
+stopwatch.Stop();
+Console.WriteLine($"Part 1 took {stopwatch.ElapsedMilliseconds}ms");
 
 await RunPart2("example.txt");
 
-var stopwatch = Stopwatch.StartNew();
+stopwatch = Stopwatch.StartNew();
 await RunPart2("input.txt");
 stopwatch.Stop();
 Console.WriteLine($"Part 2 took {stopwatch.ElapsedMilliseconds}ms");
