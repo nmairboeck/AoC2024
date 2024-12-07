@@ -142,9 +142,10 @@ async Task RunPart2(string fileName)
             {
                 // we have a visited field, try an obstacle
                 //clone the data
-                var dataCopy = data.Select(l => (char[])l.Clone()).ToArray();
-                dataCopy[i][j] = '#';
-                var (_, success) = VisitFields(dataCopy, rows, columns, startingRow, startingColumn);
+
+                data[i][j] = '#';
+                var (_, success) = VisitFields(data, rows, columns, startingRow, startingColumn);
+                data[i][j] = '.';
                 if (!success)
                 {
                     loopCount++;
